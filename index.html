@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>The Psychic Game</h1>
+  <font size = 22>
+  Wins: <div id="wins"></div>
+  Losses: <div id="losses"></div>
+  Guesses Remaining: <div id="guessRemain"></div>
+  Guesses: <div id="guessAlready"></div>
+</font>
+
+  <script>
+    var alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    var wins = 0;
+    var losses = 0;
+    var guesses = 9;
+    var computerGuess = alpha[Math.floor(Math.random() * alpha.length)];
+    var playerGuess = [];
+    var winner = document.getElementById("wins");
+    var guessesRe = document.getElementById("guessRemain");
+    var loser = document.getElementById("losses");
+    var alreadyGuessed = document.getElementById("guessAlready");
+
+    function updateDisplays() {
+      winner.textContent = wins;
+      guessesRe.textContent = guesses;
+      loser.textContent = losses;
+    }
+
+    document.onkeyup = function (event) {
+
+      var userGuess = event.key;
+      playerGuess.push(userGuess);
+      alreadyGuessed.textContent = playerGuess;
+
+      if (userGuess === computerGuess) {
+
+        wins++;
+        guesses = 9
+        playerGuess = [];
+        computerGuess = letters[Math.floor(Math.random() * letters.length)];
+
+      } else {
+
+        guesses--;
+
+        if (guesses === 0) {
+          losses++;
+          playerGuess = [];
+          guesses = 9;
+        }
+
+      }
+
+      updateDisplays();
+
+    }
+
+
+    updateDisplays();
+
+  </script>
+</body>
+
+</html>
